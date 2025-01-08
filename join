@@ -1,0 +1,38 @@
+CREATE TABLE Person (
+    person_id NUMBER(3) PRIMARY KEY,
+    lastname VARCHAR2(20),
+    firstname VARCHAR2(20),
+    address VARCHAR2(20)
+);
+
+CREATE TABLE "Order" (
+    order_id NUMBER(5) PRIMARY KEY,
+    person_id NUMBER(3),
+    odate DATE,
+    FOREIGN KEY (person_id) REFERENCES Person(person_id)
+);
+
+
+SELECT *
+FROM "Order" o
+INNER JOIN Person p
+ON o.person_id = p.person_id;
+
+
+SELECT *
+FROM "Order" o
+LEFT OUTER JOIN Person p
+ON o.person_id = p.person_id;
+
+
+SELECT *
+FROM "Order" o
+RIGHT OUTER JOIN Person p
+ON o.person_id = p.person_id;
+
+
+SELECT *
+FROM "Order" o
+FULL OUTER JOIN Person p
+ON o.person_id = p.person_id;
+
