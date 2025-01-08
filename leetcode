@@ -1,1 +1,30 @@
 
+select EmployeeUNI.unique_id,Employees.name from Employees left outer join EmployeeUNI on EmployeeUNI.id=Employees.id;
+
+select Product.product_name, Sales.year, Sales.price from Sales join Product on Sales.product_id=Product.product_id;
+
+select Students.student_id,
+Students.student_name,
+Subjects.subject_name, 
+COUNT(Examinations.subject_name) AS attended_exams 
+FROM Students 
+JOIN subjects 
+LEFT JOIN Examinations 
+ON Students.student_id=Examinations.student_id 
+AND Subjects.subject_name=Examinations.subject_name 
+GROUP BY Students.student_id, Subjects.subject_name
+ORDER BY student_id ASC, subject_name ASC;
+
+
+SELECT
+    Students.student_id,
+    Students.student_name,
+    Subjects.subject_name,
+    COUNT(Examinations.subject_name) AS attended_exams
+FROM Students
+JOIN Subjects
+LEFT JOIN Examinations
+ON Students.student_id = Examinations.student_id
+AND Subjects.subject_name = Examinations.subject_name
+GROUP BY Students.student_id, Subjects.subject_name
+ORDER BY student_id ASC, subject_name ASC
