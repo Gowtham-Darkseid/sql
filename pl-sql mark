@@ -1,0 +1,32 @@
+DECLARE
+    studno_input NUMBER;
+    total_marks NUMBER;
+    avg_marks NUMBER;
+    grade CHAR(1);
+BEGIN
+    -- Accept student number
+    studno_input := &Enter_Student_Number; -- Use substitution variable in SQL*Plus
+
+    -- Fetch total marks and calculate average
+    SELECT (mark1 + mark2 + mark3) INTO total_marks
+    FROM student
+    WHERE studentno = studno_input;
+
+    avg_marks := total_marks / 3;
+
+    -- Determine grade based on average marks
+    IF avg_marks >= 90 THEN
+        grade := 'A';
+    ELSIF avg_marks >= 75 THEN
+        grade := 'B';
+    ELSIF avg_marks >= 50 THEN
+        grade := 'C';
+    ELSE
+        grade := 'D';
+    END IF;
+
+    -- Output grade
+    DBMS_OUTPUT.PUT_LINE('Student No: ' || studno_input);
+    DBMS_OUTPUT.PUT_LINE('Grade: ' || grade);
+END;
+/
