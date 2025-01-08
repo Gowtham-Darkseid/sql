@@ -1,0 +1,102 @@
+CREATE TABLE department (
+    deptno INT PRIMARY KEY,
+    dname VARCHAR(50),
+    loc VARCHAR(50)
+);
+
+CREATE TABLE employee (
+    empno INT PRIMARY KEY,
+    ename VARCHAR(50),
+    job VARCHAR(50),
+    mgr INT,
+    hiredate DATE,
+    sal DECIMAL(10, 2),
+    commission DECIMAL(10, 2),
+    deptno INT,
+    FOREIGN KEY (deptno) REFERENCES department(deptno)
+);
+
+INSERT INTO department (deptno, dname, loc) VALUES
+(10, 'ACCOUNTING', 'NEW YORK'),
+(20, 'RESEARCH', 'DALLAS'),
+(30, 'SALES', 'CHICAGO'),
+(40, 'OPERATIONS', 'BOSTON');
+
+INSERT INTO employee (empno, ename, job, mgr, hiredate, sal, commission, deptno) VALUES
+(7839, 'KING', 'PRESIDENT', NULL, '1990-06-09', 5000.00, NULL, 10),
+(7566, 'JONES', 'MANAGER', 7839, '1992-06-13', 2975.00, NULL, 20),
+(7698, 'BLAKE', 'MANAGER', 7839, '1993-12-01', 2850.00, NULL, 30),
+(7782, 'CLARK', 'MANAGER', 7839, '1990-05-14', 2450.00, NULL, 10),
+(7788, 'SCOTT', 'ANALYST', 7566, '1992-05-14', 3000.00, NULL, 20),
+(7902, 'FORD', 'ANALYST', 7566, '1995-12-05', 3000.00, NULL, 20),
+(7844, 'TURNER', 'SALESMAN', 7698, '1995-06-04', 1500.00, 0.15, 30),
+(7900, 'JAMES', 'CLERK', 7698, '1998-06-23', 950.00, NULL, 30),
+(7654, 'MARTIN', 'SALESMAN', 7698, '1995-12-05', 1250.00, 0.2, 30),
+(7499, 'ALLEN', 'SALESMAN', 7698, '1993-12-15', 1600.00, 0.3, 30),
+(7521, 'WARD', 'SALESMAN', 7698, '1994-03-25', 1250.00, 0.25, 30),
+(7934, 'MILLER', 'CLERK', 7782, '1999-01-21', 1300.00, NULL, 10),
+(7876, 'ADAMS', 'CLERK', 7788, '1999-06-04', 1100.00, NULL, 20),
+(7369, 'SMITH', 'CLERK', 7902, '1999-10-05', 800.00, NULL, 20);
+
+
+
+SELECT COUNT(*) AS clerk_count
+FROM employee
+WHERE job = 'CLERK';
+
+SELECT deptno
+FROM employee
+WHERE job = 'CLERK'
+GROUP BY deptno
+HAVING COUNT(*) = 1;
+
+
+SELECT deptno, COUNT(*) AS clerk_count
+FROM employee
+WHERE job = 'CLERK'
+GROUP BY deptno
+ORDER BY clerk_count DESC;
+
+SELECT deptno, COUNT(*) AS employee_count
+FROM employee
+GROUP BY deptno;
+
+SELECT job, MIN(sal) AS lowest_salary
+FROM employee
+GROUP BY job
+ORDER BY lowest_salary DESC;
+
+
+SELECT deptno, AVG(sal) AS avg_salary
+FROM employee
+GROUP BY deptno
+ORDER BY avg_salary ASC
+LIMIT 1;
+
+SELECT job, MIN(sal), MAX(sal), AVG(sal)
+FROM employee
+GROUP BY job;
+
+SELECT ename
+FROM employee
+WHERE ename LIKE 'LA%';
+
+SELECT ename
+FROM employee
+WHERE ename LIKE '%LA%';
+
+SELECT ename
+FROM employee
+WHERE ename LIKE '%KE';
+
+
+SELECT job, MIN(sal), MAX(sal)
+FROM employee;
+
+
+SELECT job, MIN(sal)- MAX(sal)
+FROM employee
+
+
+
+
