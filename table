@@ -1,0 +1,27 @@
+DECLARE
+  -- Declare variables
+  i NUMBER;
+BEGIN
+  -- For generating multiplication table for 2
+  DBMS_OUTPUT.PUT_LINE('Multiplication Table for 2:');
+  FOR i IN 1..10 LOOP
+    DBMS_OUTPUT.PUT_LINE('2 * ' || i || ' = ' || (2 * i));
+  END LOOP;
+  
+  DBMS_OUTPUT.PUT_LINE('');  -- Empty line for separation
+
+  -- For generating multiplication table for 4
+  DBMS_OUTPUT.PUT_LINE('Multiplication Table for 4:');
+  FOR i IN 1..10 LOOP
+    DBMS_OUTPUT.PUT_LINE('4 * ' || i || ' = ' || (4 * i));
+  END LOOP;
+  
+  DBMS_OUTPUT.PUT_LINE('');  -- Empty line for separation
+
+  -- For generating multiplication table for 6
+  DBMS_OUTPUT.PUT_LINE('Multiplication Table for 6:');
+  FOR i IN 1..10 LOOP
+    DBMS_OUTPUT.PUT_LINE('6 * ' || i || ' = ' || (6 * i));
+  END LOOP;
+END;
+/
