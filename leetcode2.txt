@@ -1,0 +1,59 @@
+
+select EmployeeUNI.unique_id,Employees.name from Employees left outer join EmployeeUNI on EmployeeUNI.id=Employees.id;
+
+select Product.product_name, Sales.year, Sales.price from Sales join Product on Sales.product_id=Product.product_id;
+
+select Students.student_id,
+Students.student_name,
+Subjects.subject_name, 
+COUNT(Examinations.subject_name) AS attended_exams 
+FROM Students 
+JOIN subjects 
+LEFT JOIN Examinations 
+ON Students.student_id=Examinations.student_id 
+AND Subjects.subject_name=Examinations.subject_name 
+GROUP BY Students.student_id, Subjects.subject_name
+ORDER BY student_id ASC, subject_name ASC;
+
+
+SELECT
+    Students.student_id,
+    Students.student_name,
+    Subjects.subject_name,
+    COUNT(Examinations.subject_name) AS attended_exams
+FROM Students
+JOIN Subjects
+LEFT JOIN Examinations
+ON Students.student_id = Examinations.student_id
+AND Subjects.subject_name = Examinations.subject_name
+GROUP BY Students.student_id, Subjects.subject_name
+ORDER BY student_id ASC, subject_name ASC
+
+
+SELECT name FROM Employee WHERE id IN (SELECT managerId FROM Employee GROUP BY managerId HAVING COUNT(*) >= 5)
+
+select product_id,year as first_year, quantity, price from Sales where (product_id, year) in (select product_id, min(year) from Sales group by product_id);
+
+
+SELECT
+    d.name AS Department,
+    e.name AS Employee,
+    e.salary AS Salary
+FROM
+    Employee e
+    JOIN Department d ON e.departmentId = d.id
+WHERE
+    (
+        SELECT COUNT(DISTINCT salary)
+        FROM Employee e2
+        WHERE e2.departmentId = e.departmentId AND e2.salary >= e.salary
+    ) <= 3
+ORDER BY
+    Department, Salary DESC;
+
+
+select d.Name Department, e1.Name Employee, e1.Salary
+from Employee e1 
+join Department d
+on e1.DepartmentId = d.Id
+where 3 > (select count(distinct(e2.Salary)) 
